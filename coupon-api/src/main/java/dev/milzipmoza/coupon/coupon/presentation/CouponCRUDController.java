@@ -1,7 +1,7 @@
 package dev.milzipmoza.coupon.coupon.presentation;
 
 import dev.milzipmoza.coupon.common.ApiResponse;
-import dev.milzipmoza.coupon.coupon.application.CouponModule;
+import dev.milzipmoza.coupon.coupon.application.CouponCRUDModule;
 import dev.milzipmoza.coupon.coupon.dto.CouponCreateRequestDto;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class CouponCRUDController {
     private static final String REQUEST_HEADER_USER_ID = "Tecobrary-User-Id";
     private static final String REQUEST_HEADER_USER_NAME = "Tecobrary-User-Name";
 
-    private final CouponModule couponModule;
+    private final CouponCRUDModule couponCRUDModule;
 
     @GetMapping
     public Mono<ApiResponse> readUserCoupon(
@@ -26,7 +26,7 @@ public class CouponCRUDController {
             @RequestHeader(name = REQUEST_HEADER_USER_NAME) String userName
     ) {
         log.info("[쿠폰조회] user_id - {}, user_name - {}", userId, userName);
-        return Mono.just(couponModule.readByUserInfo(userId, userName));
+        return Mono.just(couponCRUDModule.readByUserInfo(userId, userName));
     }
 
     @PostMapping
@@ -36,7 +36,7 @@ public class CouponCRUDController {
             @RequestBody CouponCreateRequestDto requestDto
     ) {
         log.info("[쿠폰생성] user_id - {}, user_name - {}, request - {}", userId, userName, requestDto);
-        return Mono.just(couponModule.create(userId, userName, requestDto));
+        return Mono.just(couponCRUDModule.create(userId, userName, requestDto));
     }
 
     @DeleteMapping
@@ -46,6 +46,6 @@ public class CouponCRUDController {
             @RequestParam Long couponNo
     ) {
         log.info("[쿠폰삭제] user_id - {}, user_name - {}, request - {}", userId, userName, couponNo);
-        return Mono.just(couponModule.delete(userId, couponNo));
+        return Mono.just(couponCRUDModule.delete(userId, couponNo));
     }
 }

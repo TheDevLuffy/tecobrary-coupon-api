@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class CouponModule {
+public class CouponCRUDModule {
 
     private static final String READ_SUCCESS_MESSAGE = "쿠폰 조회 성공";
     private static final String CREATE_SUCCESS_MESSAGE = "쿠폰 생성 성공";
