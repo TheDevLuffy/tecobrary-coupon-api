@@ -37,6 +37,9 @@ public class Coupon extends DeletableEntity {
     @Embedded
     private CouponUsablePeriod usablePeriod;
 
+    @Embedded
+    private CouponInfo info;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "coupon_status")
     private CouponStatus status;
@@ -45,13 +48,15 @@ public class Coupon extends DeletableEntity {
     public Coupon(final String name,
                   final String description,
                   final LocalDateTime usableStartTime,
-                  final LocalDateTime usableEndTime) {
+                  final LocalDateTime usableEndTime,
+                  final CouponInfo info) {
         checkName(name);
         checkDescription(description);
         this.name = name;
         this.description = description;
         this.usablePeriod = new CouponUsablePeriod(usableStartTime, usableEndTime);
-        this.status = CouponStatus.UNUSED;
+        this.info = info;
+        this.status = CouponStatus.CREATED;
     }
 
     private void checkName(final String name) {
