@@ -16,10 +16,8 @@ class CouponTest {
     private static final String VALID_COUPON_DESC = "루피가 사는 커피 쿠폰";
     private static final LocalDateTime VALID_USABLE_START_TIME = LocalDateTime.now().plusDays(1L);
     private static final LocalDateTime VALID_USABLE_END_TIME = LocalDateTime.now().plusDays(2L);
-    private static final CouponInfo VALID_COUPON_INFO = CouponInfo.builder()
-            .createUserId(1L)
-            .createUserName("루피")
-            .build();
+    private static final long VALID_CREATE_USER_ID = 1L;
+    private static final String VALID_CREATE_USER_NAME = "루피";
 
     @Test
     @DisplayName("Coupon 성공적으로 생성")
@@ -27,7 +25,8 @@ class CouponTest {
         assertDoesNotThrow(() -> Coupon.builder()
                 .name(VALID_COUPON_NAME)
                 .description(VALID_COUPON_DESC)
-                .info(VALID_COUPON_INFO)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
                 .usableStartTime(VALID_USABLE_START_TIME)
                 .usableEndTime(VALID_USABLE_END_TIME)
                 .build());
@@ -45,7 +44,8 @@ class CouponTest {
                         "러므로글자" +
                         "ㅇ")
                 .description(VALID_COUPON_DESC)
-                .info(VALID_COUPON_INFO)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
                 .usableStartTime(VALID_USABLE_START_TIME)
                 .usableEndTime(VALID_USABLE_END_TIME)
                 .build());
@@ -67,7 +67,8 @@ class CouponTest {
                         "도있을것같지만또꼭그" +
                         "렇지만은않아요화이팅" +
                         "ㅇ")
-                .info(VALID_COUPON_INFO)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
                 .usableStartTime(VALID_USABLE_START_TIME)
                 .usableEndTime(VALID_USABLE_END_TIME)
                 .build());
@@ -79,7 +80,8 @@ class CouponTest {
         assertThrows(InvalidCouponUsablePeriodException.class, () -> Coupon.builder()
                 .name(VALID_COUPON_NAME)
                 .description(VALID_COUPON_DESC)
-                .info(VALID_COUPON_INFO)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
                 .usableStartTime(LocalDateTime.now().minusDays(1L))
                 .usableEndTime(LocalDateTime.now())
                 .build());
@@ -91,7 +93,8 @@ class CouponTest {
         assertThrows(InvalidCouponUsablePeriodException.class, () -> Coupon.builder()
                 .name(VALID_COUPON_NAME)
                 .description(VALID_COUPON_DESC)
-                .info(VALID_COUPON_INFO)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
                 .usableStartTime(LocalDateTime.now())
                 .usableEndTime(LocalDateTime.now().minusDays(1L))
                 .build());

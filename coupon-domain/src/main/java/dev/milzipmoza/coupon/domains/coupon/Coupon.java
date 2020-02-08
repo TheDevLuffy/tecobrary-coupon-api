@@ -49,13 +49,14 @@ public class Coupon extends DeletableEntity {
                   final String description,
                   final LocalDateTime usableStartTime,
                   final LocalDateTime usableEndTime,
-                  final CouponInfo info) {
+                  final Long createUserId,
+                  final String createUserName) {
         checkName(name);
         checkDescription(description);
         this.name = name;
         this.description = description;
         this.usablePeriod = new CouponUsablePeriod(usableStartTime, usableEndTime);
-        this.info = info;
+        this.info = new CouponInfo(createUserId, createUserName);
         this.status = CouponStatus.CREATED;
     }
 
@@ -68,6 +69,20 @@ public class Coupon extends DeletableEntity {
     private void checkDescription(final String description) {
         if (description.length() > COUPON_DESC_LENGTH) {
             throw new IllegalCouponConditionException(COUPON_DESC_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public LocalDateTime getUsableStartTime() {
+        return this.usablePeriod.getUsableStartTime();
+    }
+
+    public LocalDateTime getUsableEndTime() {
+        return this.usablePeriod.getUsableEndTime();
+    }
+
+    public void checkUserId(final Long userId) {
+        if (info.getCreateUserId().equals(userId)) {
+            throw new FailedIdentifyCreateUserException();
         }
     }
 }
