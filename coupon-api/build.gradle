@@ -12,5 +12,7 @@ repositories {
 }
 
 dependencies {
-    project(":coupon-domain")
+    implementation project(":coupon-domain")
+
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:2.2.4.RELEASE'
 }
