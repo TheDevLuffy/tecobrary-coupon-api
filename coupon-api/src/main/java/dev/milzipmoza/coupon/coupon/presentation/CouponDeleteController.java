@@ -5,14 +5,14 @@ import dev.milzipmoza.coupon.coupon.application.CouponCRUDModule;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-@Controller("/v1/coupon")
+@RestController("/v1/coupon")
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CouponDeleteController {
 
