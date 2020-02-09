@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-@RestController("/v1/coupon")
+@RestController
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CouponReadController {
 
@@ -20,7 +20,7 @@ public class CouponReadController {
 
     private final CouponCRUDModule couponCRUDModule;
 
-    @GetMapping
+    @GetMapping("/v1/coupons")
     public Mono<ApiResponse> readUserCoupon(
             @RequestHeader(name = REQUEST_HEADER_USER_ID) Long userId,
             @RequestHeader(name = REQUEST_HEADER_USER_NAME) String userName

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-@RestController("/v1/coupon")
+@RestController
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CouponDeleteController {
 
@@ -21,7 +21,7 @@ public class CouponDeleteController {
 
     private final CouponCRUDModule couponCRUDModule;
 
-    @DeleteMapping
+    @DeleteMapping("/v1/coupons")
     public Mono<ApiResponse> deleteCoupon(
             @RequestHeader(name = REQUEST_HEADER_USER_ID) Long userId,
             @RequestHeader(name = REQUEST_HEADER_USER_NAME) String userName,

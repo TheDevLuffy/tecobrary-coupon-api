@@ -33,10 +33,7 @@ public class CouponCRUDModule {
                         .name(coupon.getName())
                         .build())
                 .collect(Collectors.toList());
-        return ApiResponse.ok(
-                READ_SUCCESS_MESSAGE,
-                new HashMap<>().put("coupons", response)
-        );
+        return ApiResponse.ok(READ_SUCCESS_MESSAGE, response);
     }
 
     public ApiResponse create(final Long userId,
@@ -49,10 +46,7 @@ public class CouponCRUDModule {
                 .usableStartTime(savedCoupon.getUsableStartTime())
                 .usableEndTime(savedCoupon.getUsableEndTime())
                 .build();
-        return ApiResponse.ok(
-                CREATE_SUCCESS_MESSAGE,
-                new HashMap<>().put("coupon", response)
-        );
+        return ApiResponse.ok(CREATE_SUCCESS_MESSAGE, response);
     }
 
     public ApiResponse delete(final Long userId,
@@ -61,9 +55,6 @@ public class CouponCRUDModule {
         CouponDeleteResponseDto response = CouponDeleteResponseDto.builder()
                 .name(deletedCoupon.getName())
                 .build();
-        return ApiResponse.ok(
-                DELETE_SUCCESS_MESSAGE,
-                new HashMap<>().put("delete", response)
-        );
+        return ApiResponse.ok(DELETE_SUCCESS_MESSAGE, response);
     }
 }
