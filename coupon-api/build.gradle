@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'org.asciidoctor.convert'
 }
 
 group 'dev.milzipmoza'
@@ -9,6 +10,20 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+test {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
 }
 
 dependencies {
