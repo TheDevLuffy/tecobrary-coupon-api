@@ -17,6 +17,7 @@ class CouponTest {
     private static final LocalDateTime VALID_USABLE_START_TIME = LocalDateTime.now().plusDays(1L);
     private static final LocalDateTime VALID_USABLE_END_TIME = LocalDateTime.now().plusDays(2L);
     private static final long VALID_CREATE_USER_ID = 1L;
+    private static final long NOT_SAME_USER_ID = 2L;
     private static final String VALID_CREATE_USER_NAME = "루피";
 
     @Test
@@ -98,5 +99,33 @@ class CouponTest {
                 .usableStartTime(LocalDateTime.now())
                 .usableEndTime(LocalDateTime.now().minusDays(1L))
                 .build());
+    }
+
+    @Test
+    @DisplayName("Coupon 생성 유저 아이디 확인 성공")
+    void 유저_아이디_확인_일치() {
+        Coupon coupon = Coupon.builder()
+                .name(VALID_COUPON_NAME)
+                .description(VALID_COUPON_DESC)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
+                .usableStartTime(VALID_USABLE_START_TIME)
+                .usableEndTime(VALID_USABLE_END_TIME)
+                .build();
+        assertDoesNotThrow(() -> coupon.checkUserId(VALID_CREATE_USER_ID));
+    }
+
+    @Test
+    @DisplayName("Coupon 생성 유저 아이디 확인 실패 불일치")
+    void 유저_아이디_확인_불일치() {
+        Coupon coupon = Coupon.builder()
+                .name(VALID_COUPON_NAME)
+                .description(VALID_COUPON_DESC)
+                .createUserId(VALID_CREATE_USER_ID)
+                .createUserName(VALID_CREATE_USER_NAME)
+                .usableStartTime(VALID_USABLE_START_TIME)
+                .usableEndTime(VALID_USABLE_END_TIME)
+                .build();
+        assertThrows(FailedIdentifyCreateUserException.class, () -> coupon.checkUserId(NOT_SAME_USER_ID));
     }
 }

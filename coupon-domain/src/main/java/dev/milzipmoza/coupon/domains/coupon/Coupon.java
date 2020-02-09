@@ -81,7 +81,7 @@ public class Coupon extends DeletableEntity {
     }
 
     public void checkUserId(final Long userId) {
-        if (info.getCreateUserId().equals(userId)) {
+        if (!info.getCreateUserId().equals(userId)) {
             throw new FailedIdentifyCreateUserException();
         }
     }
